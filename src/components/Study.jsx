@@ -5,6 +5,7 @@ export default class Study extends Component {
     constructor() {
         super()
         this.state = {
+            classList: [],
             className: "",
             moduleName: "",
             numOfQuestions: "",
@@ -30,6 +31,7 @@ export default class Study extends Component {
     render(){
         return (
             <div>
+                {/* This page will render a list of available classes to select from, and then render the questions for the selected class */}
                 <span>
                     <h3>You're Studying for className</h3>
                     <p>This is question questionNumber/totalQuestions</p>
