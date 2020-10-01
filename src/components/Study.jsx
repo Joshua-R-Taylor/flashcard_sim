@@ -30,7 +30,16 @@ export default class Study extends Component {
     render(){
         return (
             <div>
-                <p>This is the Study component</p>
+                <span>
+                    <h3>You're Studying for className</h3>
+                    <p>This is question questionNumber/totalQuestions</p>
+                </span>
+                <div>
+                    {/* This will conditionally render the question, or the answer, and handle a "click to flip the card" method */}
+                </div>
+                <span>
+                    <button>Next Card</button>
+                </span>
             </div>
         )
     }
