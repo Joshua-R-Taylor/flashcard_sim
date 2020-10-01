@@ -5,7 +5,10 @@ export default class Edit extends Component {
     constructor() {
         super()
         this.state = {
-            loggedIn: false
+            className: "",
+            modules: [],
+            questions: [],
+            answers: []
         }
     }
     render(){
