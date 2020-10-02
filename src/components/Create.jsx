@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import getClasses from './methods/getClasses'
+import ClassCard from './ClassCard'
 
 export default class Create extends Component {
     constructor() {
@@ -16,10 +17,14 @@ export default class Create extends Component {
         this.setState({classes})
     }
 
-    render(){
+    addModule = () => {
+        console.log('This is the add module method')
+    }
+
+    render() {
         let displayClasses = this.state.classes.map(className => {
             return (
-                <li key={className.id}>{className.name} <button>Add Module</button></li>
+                <ClassCard key = {className.id} id={className.id} name={className.name} addModule={this.addModule}/>
             )
         })
         return (
