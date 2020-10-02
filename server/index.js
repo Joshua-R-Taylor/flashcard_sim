@@ -3,6 +3,10 @@ const massive = require('massive')
 require('dotenv').config()
 const app = express()
 
+// Controllers ===================================================
+const ClassController = require('./controllers/ClassController')
+// ===============================================================
+
 const {CONNECTION_STRING, SERVER_PORT} = process.env
 
 app.use(express.json())
@@ -17,6 +21,7 @@ massive(CONNECTION_STRING).then(dbInstance=> {
 // Endpoints: 
 
 // get classes
+app.get('/classes', ClassController.getClasses)
 // get modules for a class
 // get questions for a module
 // get answers for a question

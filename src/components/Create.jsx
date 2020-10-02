@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import getClasses from './methods/getClasses'
 
 export default class Create extends Component {
     constructor() {
@@ -11,7 +11,17 @@ export default class Create extends Component {
         }
     }
 
+    componentDidMount = async() => {
+        const classes = await getClasses();
+        this.setState({classes})
+    }
+
     render(){
+        let displayClasses = this.state.classes.map(className => {
+            return (
+                <li key={className.id}>{className.name} <button>Add Module</button></li>
+            )
+        })
         return (
             <div>
                 <h1>Create Flashcards</h1>
@@ -19,10 +29,8 @@ export default class Create extends Component {
                 <div>
                     <p>What would you like to do?</p>
                     <div>
-                        {/* This will be dynamically rendered from the db of classes */}
                         <ul>
-                            <li>Class One <button>Add Module</button></li>
-                            <li>Class Two <button>Add Module</button></li>
+                            {displayClasses}
                         </ul>
                         <button>Add New Class</button>
                     </div>

@@ -1,1 +1,2 @@
-select * from classes;
+select * from classes
+order by id;
