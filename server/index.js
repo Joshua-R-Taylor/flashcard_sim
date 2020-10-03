@@ -30,6 +30,7 @@ app.get('/questions/:id', QuestionController.getQuestions)
 app.get('/answers/:id', AnswerController.getAnswers)
 
 // post class
+app.post('/classes', ClassController.createClasses)
 // post module for a class
 // post questions for a module
 // post answers for a question

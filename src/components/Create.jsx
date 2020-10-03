@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import getClasses from './methods/getClasses'
 import ClassCard from './ClassCard'
+import axios from 'axios'
 
 export default class Create extends Component {
     constructor() {
@@ -13,12 +14,24 @@ export default class Create extends Component {
     }
 
     componentDidMount = async() => {
-        const classes = await getClasses();
-        this.setState({classes})
+        this.updateClasses()
     }
 
     addModule = () => {
         console.log('This is the add module method')
+    }
+
+    addClass = () => {
+        // TODO --- remove test case, fully code functionality
+        let name = 'test class'
+        axios.post('/classes', {name}).then(res => {
+            this.updateClasses()
+        })
+    }
+
+    updateClasses = async () => {
+        const classes = await getClasses();
+        this.setState({classes})
     }
 
     render() {
@@ -37,7 +50,7 @@ export default class Create extends Component {
                         <ul>
                             {displayClasses}
                         </ul>
-                        <button>Add New Class</button>
+                        <button onClick={() => this.addClass()}>Add New Class</button>
                     </div>
                 </div>
             </div>
