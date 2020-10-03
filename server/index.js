@@ -26,8 +26,8 @@ massive(CONNECTION_STRING).then(dbInstance=> {
 // get requests
 app.get('/classes', ClassController.getClasses)
 app.get('/modules/:id', ModuleController.getModules)
-app.get('./questions/:id', QuestionController.getQuestions)
-app.get('./answers/:id', AnswerController.getAnswers)
+app.get('/questions/:id', QuestionController.getQuestions)
+app.get('/answers/:id', AnswerController.getAnswers)
 
 // post class
 // post module for a class
