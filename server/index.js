@@ -5,6 +5,9 @@ const app = express()
 
 // Controllers ===================================================
 const ClassController = require('./controllers/ClassController')
+const ModuleController = require('./controllers/ModuleController')
+const QuestionController = require('./controllers/QuestionController')
+const AnswerController = require('./controllers/AnswerController')
 // ===============================================================
 
 const {CONNECTION_STRING, SERVER_PORT} = process.env
@@ -20,11 +23,11 @@ massive(CONNECTION_STRING).then(dbInstance=> {
 
 // Endpoints: 
 
-// get classes
+// get requests
 app.get('/classes', ClassController.getClasses)
-// get modules for a class
-// get questions for a module
-// get answers for a question
+app.get('/modules/:id', ModuleController.getModules)
+app.get('./questions/:id', QuestionController.getQuestions)
+app.get('./answers/:id', AnswerController.getAnswers)
 
 // post class
 // post module for a class
