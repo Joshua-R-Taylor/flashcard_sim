@@ -17,15 +17,25 @@ export default class Create extends Component {
         this.updateClasses()
     }
 
-    addModule = () => {
-        console.log('This is the add module method')
-    }
-
     addClass = () => {
         // TODO --- remove test case, fully code functionality
         let name = 'test class'
         axios.post('/classes', {name}).then(res => {
             this.updateClasses()
+        })
+    }
+
+    handleAddClass = () => {
+        this.setState({
+            createClass: true,
+            createModule: false
+        })
+    }
+
+    handleAddModule = () => {
+        this.setState({
+            createClass: false,
+            createModule: true
         })
     }
 
@@ -37,7 +47,7 @@ export default class Create extends Component {
     render() {
         let displayClasses = this.state.classes.map(className => {
             return (
-                <ClassCard key = {className.id} id={className.id} name={className.name} addModule={this.addModule}/>
+                <ClassCard key = {className.id} id={className.id} name={className.name} addModule={this.handleAddModule}/>
             )
         })
         return (
@@ -46,12 +56,24 @@ export default class Create extends Component {
 
                 <div>
                     <p>What would you like to do?</p>
-                    <div>
-                        <ul>
-                            {displayClasses}
-                        </ul>
-                        <button onClick={() => this.addClass()}>Add New Class</button>
-                    </div>
+                    {
+                        this.state.createClass === false && this.state.createModule === false ?
+                        <div>
+                            <ul>
+                                {displayClasses}
+                            </ul>
+                            <button onClick={() => this.handleAddClass()}>Add New Class</button>
+                        </div>
+                        :
+                        this.state.createClass === true ?
+                        <div>
+                            <p>This is the Create Class Form</p>
+                        </div>
+                        :
+                        <div>
+                            <p>This is the Create Module Form</p>
+                        </div>
+                    }
                 </div>
             </div>
         )
