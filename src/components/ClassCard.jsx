@@ -8,7 +8,7 @@ export default class ClassCard extends Component {
 
     render() {
         return (
-            <li key ={this.props.id}>{this.props.name} <button onClick={() => this.props.addModule()}>Add Module</button></li>
+            <li key ={this.props.id}>{this.props.name} <button onClick={() => this.props.addModule(this.props.id)}>Add Module</button></li>
             )
         }
 }

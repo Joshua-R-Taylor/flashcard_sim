@@ -9,7 +9,8 @@ export default class Create extends Component {
         this.state = {
             createClass: false,
             createModule: false,
-            classes: []
+            classes: [],
+            moduleClassId: ''
         }
     }
 
@@ -32,10 +33,11 @@ export default class Create extends Component {
         })
     }
 
-    handleAddModule = () => {
+    handleAddModule = id => {
         this.setState({
             createClass: false,
-            createModule: true
+            createModule: true,
+            moduleClassId: id
         })
     }
 
@@ -68,6 +70,7 @@ export default class Create extends Component {
                         this.state.createClass === true ?
                         <div>
                             <p>This is the Create Class Form</p>
+                            {/* Make a classform component here and below to handle creation of new stuff */}
                         </div>
                         :
                         <div>
