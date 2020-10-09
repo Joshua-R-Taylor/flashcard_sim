@@ -1,83 +1,57 @@
 import React, {Component} from 'react'
+import ClassLabel from './ClassLabel'
 import getClasses from './methods/getClasses'
-import ClassCard from './ClassCard'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default class Create extends Component {
     constructor() {
         super()
         this.state = {
-            createClass: false,
-            createModule: false,
             classes: [],
-            moduleClassId: ''
+            addingClass: false,
+            addingModule: false, 
+            addingCard: false,
+            classId: '', 
+            moduleId: ''
         }
     }
 
     componentDidMount = async() => {
-        this.updateClasses()
-    }
-
-    addClass = () => {
-        // TODO --- remove test case, fully code functionality
-        let name = 'test class'
-        axios.post('/classes', {name}).then(res => {
-            this.updateClasses()
-        })
-    }
-
-    handleAddClass = () => {
-        this.setState({
-            createClass: true,
-            createModule: false
-        })
-    }
-
-    handleAddModule = id => {
-        this.setState({
-            createClass: false,
-            createModule: true,
-            moduleClassId: id
-        })
-    }
-
-    updateClasses = async () => {
-        const classes = await getClasses();
+        let classes = await getClasses();
         this.setState({classes})
     }
 
+    // handler for add class will require addingClass
+
+    // handler for add module will require classId and addingModule
+
+    // handler for add card will require moduleId and addingCard
+
     render() {
-        let displayClasses = this.state.classes.map(className => {
-            return (
-                <ClassCard key = {className.id} id={className.id} name={className.name} addModule={this.handleAddModule}/>
-            )
+        let displayClasses = this.state.classes.map(classInfo => {
+            return <ClassLabel 
+                key = {classInfo.id}
+                id = {classInfo.id} 
+                name = {classInfo.name}
+                // function for adding modules here
+            />
         })
         return (
             <div>
-                <h1>Create Flashcards</h1>
-
-                <div>
-                    <p>What would you like to do?</p>
-                    {
-                        this.state.createClass === false && this.state.createModule === false ?
+                {
+                    this.state.addingClass === true || this.state.addingModule === true || this.state.addingCard === true ? 
+                    <div> This shouldn't show yet </div>
+                    :
+                    <div>
+                        <header>
+                            <h1>Current Classes: </h1>
+                            <button /* click handler for adding class and loading form here */>Add Class</button>
+                        </header>
                         <div>
-                            <ul>
-                                {displayClasses}
-                            </ul>
-                            <button onClick={() => this.handleAddClass()}>Add New Class</button>
+                            {displayClasses}
                         </div>
-                        :
-                        this.state.createClass === true ?
-                        <div>
-                            <p>This is the Create Class Form</p>
-                            {/* Make a classform component here and below to handle creation of new stuff */}
-                        </div>
-                        :
-                        <div>
-                            <p>This is the Create Module Form</p>
-                        </div>
-                    }
-                </div>
+                    </div>    
+                }
             </div>
         )
     }
