@@ -13,7 +13,8 @@ export default class CreateForm extends Component {
             className: '',
             moduleName: '',
             question: '',
-            answer: ''
+            answer: '',
+            cards: []
         }
     }
 
@@ -25,17 +26,48 @@ export default class CreateForm extends Component {
         })
     }
 
+    handleFormFill = e => {
+        let {name, value} = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
     render() {
         return(
             <div>
                 {
                     this.state.addingClass ? 
-                    <div> We're adding a class! </div> 
+                    <div> 
+                        <form>
+                            <label>Class Name: </label>    
+                            <input type="text" name="className" placeholder="Class Name" onChange={e => this.handleFormFill(e)}/>
+                            {/* this onclick will also call changeToModule from props to switch to the module form  */}
+                            <button onClick={() => this.props.returnToDefault()}>Add Modules</button>
+                        </form> 
+                    </div> 
                     : 
                     this.state.addingModule ? 
-                    <div> We're adding a module! </div> 
+                    <div> 
+                        <form>
+                            <label>Module Name: </label> 
+                            <input type="text" name="moduleName" placeholder="Module Name" onChange={e => this.handleFormFill(e)}/>
+                            {/* this onclick will also call changeToCard from props to switch to the card form  */}
+                            <button onClick={() => this.props.returnToDefault()}>Add Cards</button>
+                        </form>
+                    </div> 
                     :
-                    <div> We're adding a card! </div>
+                    <div> 
+                        <form>
+                            <label>Card Front: </label>
+                            <input type="text" name="question" placeholder="Question Text" onChange={e => this.handleFormFill(e)}/>
+                            <label>Card Back: </label>
+                            <input type="text" name="answer" placeholder="Answer Text" onChange={e => this.handleFormFill(e)}/>
+                            <button onClick={() => this.props.returnToDefault()}>Add Another Card</button>
+                            {/* this onclick will submit to db and call returnToDefault from props to return to default view  */}
+                            <button onClick={() => this.props.returnToDefault()}>Finish!</button>
+                        </form>
+                    </div>
                 }
             </div>
         )

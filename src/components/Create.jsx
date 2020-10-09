@@ -77,13 +77,15 @@ export default class Create extends Component {
                         addingCard = {this.state.addingCard}
                         classId = {this.state.classId}
                         moduleId = {this.state.moduleId}
-                        addModule = {this.handleAddModule}
+                        changeToModule = {this.state.handleAddModule}
+                        changeToCard = {this.state.handleAddCard}
+                        returnToDefault = {this.handleDefaultState}
                     />
                     :
                     <div>
                         <header>
                             <h1>Current Classes: </h1>
-                            <button onClick={() => this.handleAddClass()}>Add Class</button>
+                            <button onClick={() => this.handleAddClass()}>Add New Class</button>
                         </header>
                         <div>
                             {displayClasses}
