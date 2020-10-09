@@ -43,13 +43,13 @@ export default class ClassLabel extends Component {
     render() {
         let displayModules = this.state.modules.map(module => {
             console.log(module)
-            return <li key={module.id}>{module.title} <button /* click handler passed from parent to add card */>Add Card</button></li>
+            return <li key={module.id}>{module.title} <button onClick={() => this.props.addCard()}>Add Card</button></li>
         })
         return (
             <div>
                 <header>
                     <h1 onClick={() => this.handleExpand()}> <span id={`${this.props.id}_${this.props.name}`}>{'>'}</span> {this.state.name} </h1>
-                    <button /* click handler passed from parent to add module */>Add Module</button>
+                    <button onClick={() => this.props.addModule()}>Add Module</button>
                 </header>
                 <ul style={{display:"none"}} id={`${this.props.id}_module_list`}>
                     {displayModules}
