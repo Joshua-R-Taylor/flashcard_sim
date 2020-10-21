@@ -1,60 +1,37 @@
 import React, {Component} from 'react'
 import ClassLabel from './ClassLabel'
-import CreateForm from './CreateForm'
 import getClasses from './methods/getClasses'
-// import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class Create extends Component {
     constructor() {
         super()
         this.state = {
             classes: [],
-            addingClass: false,
-            addingModule: false, 
-            addingCard: false,
-            classId: '', 
-            moduleId: ''
+            // adding: false,
+            // addType: null,
+            // name: null,
+            // id: null
         }
     }
 
     componentDidMount = async() => {
+        await this.getClasses()
+    }
+
+    // handleAdding = (addType, name, id) => {
+    //     let adding = true
+    //     this.setState({adding, addType, name, id})
+    // }
+
+    // handleFinishAdd = async () => {
+    //     this.setState({adding:false, addType:null, name:null, id:null})
+    //     this.getClasses()
+    // }
+
+    getClasses = async() => {
         let classes = await getClasses();
         this.setState({classes})
-    }
-
-    // handler for add class will require addingClass, will afterwards call add module
-    handleAddClass = async() => {
-        this.setState({
-            addingClass: true,
-            addingModule: false,
-            addingCard: false
-        }) // placeholder test case
-    }
-
-    // handler for add module will require classId and addingModule, will afterwards call add card
-    handleAddModule = async() => {
-        this.setState({
-            addingClass: false,
-            addingModule: true,
-            addingCard: false
-        })
-    }
-    // handler for add card will require moduleId and addingCard, will afterwards call base state function
-    handleAddCard = async() => {
-        this.setState({
-            addingClass: false,
-            addingModule: false,
-            addingCard: true
-        })
-    }
-
-    // handler for finished adding, or some sort of return function to base state to be called after any final insert into db
-    handleDefaultState = async() => {
-        this.setState({
-            addingClass: false,
-            addingModule: false,
-            addingCard: false
-        })
     }
 
     render() {
@@ -63,35 +40,31 @@ export default class Create extends Component {
                 key = {classInfo.id}
                 id = {classInfo.id} 
                 name = {classInfo.name}
-                addModule = {this.handleAddModule}
-                addCard = {this.handleAddCard}
+                // handleAdding = {this.handleAdding}
             />
         })
         return (
             <div>
-                {
-                    this.state.addingClass === true || this.state.addingModule === true || this.state.addingCard === true ? 
+                {/* {
+                    this.state.adding ?
                     <CreateForm 
-                        addingClass = {this.state.addingClass}
-                        addingModule = {this.state.addingModule}
-                        addingCard = {this.state.addingCard}
-                        classId = {this.state.classId}
-                        moduleId = {this.state.moduleId}
-                        changeToModule = {this.state.handleAddModule}
-                        changeToCard = {this.state.handleAddCard}
-                        returnToDefault = {this.handleDefaultState}
+                        addType = {this.state.addType}
+                        name = {this.state.name}
+                        id = {this.state.id}
+                        handleFinishAdd = {this.handleFinishAdd}
                     />
-                    :
+                    : */}
                     <div>
                         <header>
                             <h1>Current Classes: </h1>
-                            <button onClick={() => this.handleAddClass()}>Add New Class</button>
+                            {/* <button onClick={() => this.handleAdding("class")}>Add New Class</button> */}
+                            <Link to={'/add/class/0'}>Add New Class </Link>
                         </header>
                         <div>
                             {displayClasses}
                         </div>
                     </div>    
-                }
+                {/* } */}
             </div>
         )
     }

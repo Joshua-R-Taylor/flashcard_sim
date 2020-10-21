@@ -6,8 +6,7 @@ const app = express()
 // Controllers ===================================================
 const ClassController = require('./controllers/ClassController')
 const ModuleController = require('./controllers/ModuleController')
-const QuestionController = require('./controllers/QuestionController')
-const AnswerController = require('./controllers/AnswerController')
+const CardController = require('./controllers/CardController')
 // ===============================================================
 
 const {CONNECTION_STRING, SERVER_PORT} = process.env
@@ -26,21 +25,30 @@ massive(CONNECTION_STRING).then(dbInstance=> {
 // get requests
 app.get('/classes', ClassController.getClasses)
 app.get('/modules/:id', ModuleController.getModules)
-app.get('/questions/:id', QuestionController.getQuestions)
-app.get('/answers/:id', AnswerController.getAnswers)
+app.get('/questions/:id', CardController.getQuestions)
+app.get('/answers/:id', CardController.getAnswers)
 
 // post class
 app.post('/classes', ClassController.createClasses)
 // post module for a class
-// post questions for a module
-// post answers for a question
+app.post('/modules/:id', ModuleController.createModules)
+// post cards for a module
+app.post('/cards/:id', CardController.createCard)
 
 // put class
+app.put('/classes/:id')
 // put module for a class
+app.put('/module/:id')
 // put questions for a module
+app.put('/questions/:id')
 // put answers for a question
+app.put('/answers/:id')
 
 // delete class
+app.delete('/classes/:id')
 // delete module for a class
+app.delete('/module/:id')
 // delete questions for a module
+app.delete('/questions/:id')
 // delete answers for a question
+app.delete('/answers/:id')

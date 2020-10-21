@@ -3,3 +3,4 @@ insert into classes (
 ) values (
     ${name}
 )
+returning id, name;

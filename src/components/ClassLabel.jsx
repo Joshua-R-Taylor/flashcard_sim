@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import getModules from './methods/getModules'
-
+import {Link} from 'react-router-dom'
 
 export default class ClassLabel extends Component {
     constructor() {
@@ -42,14 +42,18 @@ export default class ClassLabel extends Component {
 
     render() {
         let displayModules = this.state.modules.map(module => {
-            console.log(module)
-            return <li key={module.id}>{module.title} <button onClick={() => this.props.addCard()}>Add Card</button></li>
+            // return <li key={module.id}>{module.title} <button onClick={() => this.props.handleAdding("card", module.title, module.id)}>Add Card</button></li>
+            return <p key={module.id}>
+                <strong>{module.title}</strong> <br/>
+                <Link to={`/add/card/${module.id}`}><button>Add Cards</button></Link>
+                </p>
         })
         return (
             <div>
                 <header>
                     <h1 onClick={() => this.handleExpand()}> <span id={`${this.props.id}_${this.props.name}`}>{'>'}</span> {this.state.name} </h1>
-                    <button onClick={() => this.props.addModule()}>Add Module</button>
+                    {/* <button onClick={() => this.props.handleAdding("module", this.props.name, this.props.id)}>Add Module</button> */}
+                    <Link key={this.props.id} to={`/add/module/${this.props.id}`}>Add a Module</Link>
                 </header>
                 <ul style={{display:"none"}} id={`${this.props.id}_module_list`}>
                     {displayModules}
