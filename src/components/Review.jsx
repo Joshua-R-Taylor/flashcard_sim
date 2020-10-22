@@ -27,6 +27,7 @@ export default class Review extends Component {
 
     handleGetCards = async (type, id) => {
         const cards = await getCards(type, id)
+        console.log(cards)
         this.setState({cards})
     }
 

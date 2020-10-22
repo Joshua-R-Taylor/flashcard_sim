@@ -21,12 +21,14 @@ module.exports = {
         module_id = +module_id
         let {question, answer} = req.body
         let question_id;
-        await db.create_new_question({question, module_id}).then(questionData => {
-            res.status(200).send()
-            question_id = questionData[0].id
-        }).catch(err => console.log(`There was an error creating that question: ${err}`))
-        await db.create_new_answer({answer, question_id}).then(answerData => res.status(200).send())
-        .catch(err => console.log(`There was an error creating that answer: ${err}`))
+        // await db.create_new_question({question, module_id}).then(questionData => {
+        //     res.status(200).send()
+        //     question_id = questionData[0].id
+        // }).catch(err => console.log(`There was an error creating that question: ${err}`))
+        // await db.create_new_answer({answer, question_id}).then(answerData => res.status(200).send())
+        // .catch(err => console.log(`There was an error creating that answer: ${err}`))
+        db.create_new_card({module_id, question, answer}).then(cardData => res.status(200).send())
+        .catch(err => console.log(`There was an error creating that card: ${err}`))
     },
 
     getCards: (req, res) => {
