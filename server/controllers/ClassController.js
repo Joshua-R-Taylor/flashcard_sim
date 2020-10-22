@@ -10,5 +10,6 @@ module.exports = {
         const {name} = req.body
         db.create_new_class({name}).then(classes => res.status(200).send(classes))
         .catch(err => console.log(`There was an error creating that class: ${err}`))
-    }
+    },
+
 }

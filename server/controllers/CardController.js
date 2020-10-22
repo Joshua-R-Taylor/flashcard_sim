@@ -6,6 +6,7 @@ module.exports = {
         db.get_questions_by_module({module_id}).then(questionData => res.status(200).send(questionData))
         .catch(err => console.log(`There was an error fetching the questions: ${err}`))
     },
+
     getAnswers: (req, res) => {
         const db = req.app.get('db')
         let question_id = req.params.id
@@ -13,6 +14,7 @@ module.exports = {
         db.get_answers_by_question({question_id}).then(answerData => res.status(200).send(answerData))
         .catch(err => console.log(`There was an error fetching the answers: ${err}`))
     },
+
     createCard: async (req, res) => {
         const db = req.app.get('db')
         let module_id = req.params.id
@@ -25,5 +27,17 @@ module.exports = {
         }).catch(err => console.log(`There was an error creating that question: ${err}`))
         await db.create_new_answer({answer, question_id}).then(answerData => res.status(200).send())
         .catch(err => console.log(`There was an error creating that answer: ${err}`))
+    },
+
+    getCards: (req, res) => {
+        const db = req.app.get('db')
+        let {type, id} = req.params
+        id = +id
+        type === "class" ? 
+        db.get_all_cards_by_class([id]).then(cards => res.status(200).send(cards))
+        .catch(err => console.log(`There was an error getting the cards for that class: ${err}`))
+        :
+        db.get_all_cards_by_module([id]).then(cards => res.status(200).send(cards))
+        .catch(err => console.log(`There was an error getting the cards for that module: ${err}`))
     }
 }

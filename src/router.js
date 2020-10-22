@@ -6,6 +6,7 @@ import Create from './components/Create'
 import CreateForm from './components/CreateForm'
 import Edit from './components/Edit'
 import Study from './components/Study'
+import Review from './components/Review'
 
 export default (
     <Switch>
@@ -14,5 +15,6 @@ export default (
         <Route exact path='/add/:addType/:id' component={CreateForm}/>
         <Route exact path='/edit' component={Edit}/>
         <Route exact path='/study' component={Study}/>
+        <Route exact path ='/review/:type/:id' component={Review} />
     </Switch>
 )

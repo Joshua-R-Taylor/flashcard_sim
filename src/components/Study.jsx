@@ -1,47 +1,41 @@
 import React, {Component} from 'react'
-
+import ClassLabel from './ClassLabel'
+import getClasses from './methods/getClasses'
 
 export default class Study extends Component {
     constructor() {
         super()
         this.state = {
-            classList: [],
-            className: "",
-            moduleName: "",
-            numOfQuestions: "",
-            questions: [],
-            displayQuestion: "",
-            answer: "",
-            flipped: false
+            classes: []
         }
     }
 
-    /*
-        Will be doing something fancy here to make sure that the questions are randomized, but that you progress through
-        the entire deck of flash cards. In other words, if we start with flashcard #4, then we click "next card", 4 is 
-        no longer available for viewing (i.e., isn't a random card that could show again)
+    componentDidMount = async() => {
+        await this.getClasses()
+    }
 
-        POSSIBLE SOLUTION: 
-        Hold the number of questions in state (by array length), set up a randomizer function with that info. Randomly generate a question. 
-        Once the question is generated, display the element at that index, remove it from the array of questions, and decrement the number 
-        of questions remaining. Repeat. 
-        
-    */
+    getClasses = async() => {
+        let classes = await getClasses();
+        this.setState({classes})
+    }
 
     render(){
+        let displayClasses = this.state.classes.map(classInfo => {
+            return <ClassLabel 
+                key = {classInfo.id}
+                id = {classInfo.id} 
+                name = {classInfo.name}
+                mode = "study"
+            />
+        })
         return (
             <div>
-                {/* This page will render a list of available classes to select from, and then render the questions for the selected class */}
-                <span>
-                    <h3>You're Studying for className</h3>
-                    <p>This is question questionNumber/totalQuestions</p>
-                </span>
+                <header>
+                    <h1>Available Classes:</h1>
+                </header>
                 <div>
-                    {/* This will conditionally render the question, or the answer, and handle a "click to flip the card" method */}
+                    {displayClasses}
                 </div>
-                <span>
-                    <button>Next Card</button>
-                </span>
             </div>
         )
     }

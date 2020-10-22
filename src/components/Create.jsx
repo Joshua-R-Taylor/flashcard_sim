@@ -40,6 +40,7 @@ export default class Create extends Component {
                 key = {classInfo.id}
                 id = {classInfo.id} 
                 name = {classInfo.name}
+                mode = "create"
                 // handleAdding = {this.handleAdding}
             />
         })
