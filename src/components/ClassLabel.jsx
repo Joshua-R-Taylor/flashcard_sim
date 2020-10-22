@@ -44,7 +44,6 @@ export default class ClassLabel extends Component {
 
     render() {
         let displayModules = this.state.modules.map(module => {
-            // return <li key={module.id}>{module.title} <button onClick={() => this.props.handleAdding("card", module.title, module.id)}>Add Card</button></li>
             return <p key={module.id}>
                 <strong>{module.title}</strong> <br/>
                 {
@@ -59,7 +58,6 @@ export default class ClassLabel extends Component {
             <div>
                 <header>
                     <h1 onClick={() => this.handleExpand()}> <span id={`${this.props.id}_${this.props.name}`}>{'>'}</span> {this.state.name} </h1>
-                    {/* <button onClick={() => this.props.handleAdding("module", this.props.name, this.props.id)}>Add Module</button> */}
                     {
                         this.state.mode === "create" ?
                         <Link key={this.props.id} to={`/add/module/${this.props.id}`}><button>Add a Module</button></Link>
