@@ -59,16 +59,21 @@ export default class CreateForm extends Component {
     }
 
     handleAddCurrentCard = () => {
-        let question = this.state.question
-        let answer = this.state.answer
+        // Create a new card object, place into our current array of cards
+        let {question, answer} = this.state
         let card = {question, answer}
         let cards = this.state.cards
         cards.push(card)
+        // empty input forms
         this.setState({
             question: '',
             answer: '', 
             cards
         })
+        // reselect the question input form for easier entry
+        const input = document.getElementById("question")
+        input.focus()
+        input.select()
     }
 
     handlePostCard = async (cards, moduleId) => {
@@ -85,6 +90,14 @@ export default class CreateForm extends Component {
     }
 
     render() {
+        const displayCards = this.state.cards.map(card => {
+            return (
+                <div>
+                    <p><strong>Question:</strong>{card.question}</p> <br/>
+                    <p><strong>Answer:</strong>{card.answer}</p> 
+                </div>
+            )
+        })
         return(
             <div>
                 {
@@ -106,12 +119,17 @@ export default class CreateForm extends Component {
                     <div>
                         <p>We are adding questions and answers to the <strong>{this.state.moduleName}</strong> module</p>
                         <label>Question Text: </label>    
-                        <input type="text" name="question" placeholder="Question Text" value={this.state.question} onChange={e => this.handleFormFill(e)}/>
+                        <input type="text" id="question" name="question" placeholder="Question Text" value={this.state.question} onChange={e => this.handleFormFill(e)}/>
                         <label>Answer Text: </label>    
-                        <input type="text" name="answer" placeholder="Answer Text" value={this.state.answer} onChange={e => this.handleFormFill(e)}/>
+                        <input type="text" id="answer" name="answer" placeholder="Answer Text" value={this.state.answer} onChange={e => this.handleFormFill(e)}/>
                         <button onClick={() => this.handleAddCurrentCard()}>Add Another Card</button>
                         <button onClick={() => this.handlePostCard(this.state.cards, this.state.moduleId)}>Finish Creating Cards</button>
                         {/* TODO: add a preview of the cards in the array  */}
+                        <br/>
+                        <h3>Current Cards: </h3>
+                        <div>
+                            {displayCards}
+                        </div>
                     </div>
                 }
                 <Link to='/create'><button>Return</button></Link>

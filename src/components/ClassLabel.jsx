@@ -50,7 +50,10 @@ export default class ClassLabel extends Component {
                     this.state.mode === "create" ? 
                     <Link to={`/add/card/${module.id}`}><button>Add Cards</button></Link>
                     :
+                    this.state.mode === "study" ?
                     <Link to={`/review/module/${module.id}`}><button>Study Module</button></Link>
+                    :
+                    <Link to={`/edit/module/${module.id}`}><button>Edit Module</button></Link>
                 }
                 </p>
         })
@@ -62,7 +65,10 @@ export default class ClassLabel extends Component {
                         this.state.mode === "create" ?
                         <Link key={this.props.id} to={`/add/module/${this.props.id}`}><button>Add a Module</button></Link>
                         :
+                        this.state.mode === "study" ?
                         <Link to={`/review/class/${this.props.id}`}><button>Study Class</button></Link>
+                        :
+                        <Link to={`/edit/class/${this.props.id}`}><button>Edit Class</button></Link>
                     }
                 </header>
                 <ul style={{display:"none"}} id={`${this.props.id}_module_list`}>
