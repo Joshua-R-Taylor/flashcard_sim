@@ -52,7 +52,6 @@ export default class CreateForm extends Component {
         const newModule = await postModule(moduleName, id)
         let moduleId = newModule.data[0].id
         moduleName = newModule.data[0].title
-        console.log(`New Module ID: ${moduleId} and Module Name: ${moduleName}`)
         this.setState({moduleName})
         this.props.history.push(`/add/card/${moduleId}`)
         this.handleUpdateState()
@@ -79,11 +78,9 @@ export default class CreateForm extends Component {
     handlePostCard = async (cards, moduleId) => {
         if(this.state.question.length > 0) {
             this.handleAddCurrentCard()
-            console.log(this.state.cards)
             await postCards(cards, moduleId)
         }
         else {
-            console.log(this.state.cards)
             await postCards(cards, moduleId)
         }
         this.props.history.push('/study')
